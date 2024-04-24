@@ -1,0 +1,29 @@
+.box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.box #textIpt {
+  min-width: 300px;
+  min-height: 200px;
+}
+
+.box .text-content {
+  all: unset;
+  border: 1px solid #ccc;
+  min-width: 300px;
+  min-height: 200px;
+  box-sizing: border-box;
+  outline: none;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+  display: inline-block;
+}
+
+.line {
+  display: block;
+  height: 1px;
+  background-color: #ccc;
+}

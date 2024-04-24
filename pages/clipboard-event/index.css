@@ -1,0 +1,13 @@
+#app {
+  /* 重置所有样式 */
+  all: unset;
+  border: 1px solid #ccc;
+  width: 200px;
+  height: 60px;
+  box-sizing: border-box;
+  outline: none;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+  display: inline-block;
+}

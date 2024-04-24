@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>navigator clipboard Test</title>
+    <link rel="stylesheet" href="./index.css" type="text/css" />
+  </head>
+
+  <body>
+    <div class="box">
+      <label for="textIpt">输入内容 :</label>
+      <textarea id="textIpt">
+{ name: 'zhansan', school: { level: 1 } }</textarea
+      >
+      <input class="copy-btn" value="点击复制或者直接Ctrl+C" type="button" />
+    </div>
+
+    <p class="line"></p>
+
+    <div class="box">
+      <label>操作结果 :</label>
+      <div class="text-content"></div>
+      <input class="clear-btn" value="清空" type="button" />
+    </div>
+
+    <script type="module" src="./index.ts"></script>
+  </body>
+</html>
