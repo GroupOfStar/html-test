@@ -25,6 +25,7 @@ function handleWriteClipboard() {
 function handleReadClipboard() {
   const resReadDom = document.querySelector(".result-text.read-res");
   if (resReadDom) {
+    const t1 = window.performance.now();
     navigator.clipboard
       .read()
       .then((clipboardItems) => {
@@ -33,7 +34,12 @@ function handleReadClipboard() {
             res
               .text()
               .then((text) => {
-                resReadDom.innerHTML = `<div class="success"><p>读取成功！使用 clipboardItem.getType("text/plain") 获取的内容为：</p><p>${text}</p></div>`;
+                const t2 = window.performance.now();
+                resReadDom.innerHTML = `<div class="success">
+                    <p>读取成功！使用 clipboardItem.getType("text/plain") 获取的内容为：</p>
+                    <p>${text}</p>
+                    <p>读取耗时：${Math.round(t2 - t1)} 毫秒</p>
+                  </div>`;
               })
               .catch((err) => {
                 resReadDom.innerHTML = `<div class="error"><p>使用的 clipboardItem.getType("text/plain") api读取失败！错误内容为：</p><p>${err.toString()}</p></div>`;
@@ -59,10 +65,16 @@ function clearByRead() {
 function handleReadTextClipboard() {
   const resReadTextDom = document.querySelector(".result-text.read-text-res");
   if (resReadTextDom) {
+    const t1 = window.performance.now();
     navigator.clipboard
       .readText()
       .then((text) => {
-        resReadTextDom.innerHTML = `<div class="success"><p>读取成功！文本内容为：</p><p>${text}</p></div>`;
+        const t2 = window.performance.now();
+        resReadTextDom.innerHTML = `<div class="success">
+            <p>读取成功！文本内容为：</p>
+            <p>${text}</p>
+            <p>读取耗时：${Math.round(t2 - t1)} 毫秒</p>
+          </div>`;
       })
       .catch((err) => {
         resReadTextDom.innerHTML = `<div class="error"><p>使用的 navigator.clipboard.readText() api读取失败！错误内容为：</p><p>${err.toString()}</p></div>`;
