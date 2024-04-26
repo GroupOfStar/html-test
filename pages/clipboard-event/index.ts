@@ -17,9 +17,10 @@ document.addEventListener("paste", function (event) {
   const clipboardData = event.clipboardData || new DataTransfer();
   const mindNode = clipboardData.getData("mind/node");
   const textPlain = clipboardData.getData("text/plain");
+  const textHtml = clipboardData.getData("text/html");
   console.log("----------下面是粘贴的内容----------");
   console.log("paste textPlain :>> ", textPlain);
-  console.log("paste mindNode :>> ", mindNode);
+  console.log("paste textHtml :>> ", textHtml);
   console.log("paste clipboardData.items :>> ", clipboardData.items);
   console.log("paste clipboardData.types :>> ", clipboardData.types);
 });

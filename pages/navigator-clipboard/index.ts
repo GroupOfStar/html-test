@@ -1,113 +1,106 @@
 import "./index.css";
 
-const textContentDom = document.querySelector(".text-content");
-
-/** 插入内容 */
-function insertTextToDiv(text: string) {
-  if (textContentDom) {
-    const oldText = textContentDom.innerHTML;
-    textContentDom.innerHTML = oldText
-      ? `${oldText}<p>${text}</p>`
-      : `<p>${text}</p>`;
-  }
-  console.log(text);
-}
-
-/** 清空内容 */
-function clearTextToDiv() {
-  if (textContentDom) {
-    textContentDom.innerHTML = "";
-  }
-}
-
-/** 复制 */
-function handleCopy() {
-  const iptDom = document.querySelector<HTMLTextAreaElement>("#textIpt");
-  if (iptDom) {
-    const blob = new Blob([JSON.stringify(iptDom.value)], {
+/** 写入剪切板内容 */
+function handleWriteClipboard() {
+  const iptDom = document.querySelector<HTMLTextAreaElement>("#text-ipt");
+  const resWriteDom = document.querySelector(".result-text.write-res");
+  if (iptDom && resWriteDom) {
+    const blob = new Blob([iptDom.value], {
       type: "text/plain",
     });
     const data = [new ClipboardItem({ ["text/plain"]: blob })];
 
     navigator.clipboard.write(data).then(
       () => {
-        clearTextToDiv();
-        insertTextToDiv(
-          "---通过 navigator.clipboard.write(data) 方法写入成功---------"
-        );
-        /* success */
-        navigator.clipboard.readText().then((text) => {
-          console.log("text :>> ", text);
-          insertTextToDiv(
-            "---通过 navigator.clipboard.readText() 方法读取成功---------"
-          );
-          insertTextToDiv(`读取的 text/plain 内容为: \n${text}`);
-        });
-
-        navigator.clipboard
-          .read()
-          .then((res) => {
-            console.log("res[0] :>> ", res[0]);
-            insertTextToDiv(
-              "---通过 navigator.clipboard.read() 方法读取成功---------"
-            );
-            insertTextToDiv(
-              `读取的 ClipboardItems[0] 对象的 types 内容为: \n${res[0].types}`
-            );
-          })
-          .catch((err) => {
-            insertTextToDiv(
-              "---通过 navigator.clipboard.read() 方法读取失败---------"
-            );
-            insertTextToDiv(`错误内容为: \n${err.toString()}`);
-          });
+        resWriteDom.innerHTML = `<p>写入成功！内容为：</p><p>${iptDom.value}</p>`;
       },
       (err) => {
-        /* failure */
-        insertTextToDiv(
-          "-----------写失败,navigator.clipboard.write api 不支持---------"
-        );
-        insertTextToDiv(`错误内容为: \n${err.toString()}\n`);
+        resWriteDom.innerHTML = `<p>---写失败,navigator.clipboard.write() api不支持, 错误内容为：</p><p>${err.toString()}</p>`;
       }
     );
   }
 }
 
+/** 通过 clipboard.read() 读取剪切板内容 */
+function handleReadClipboard() {
+  const resReadDom = document.querySelector(".result-text.read-res");
+  if (resReadDom) {
+    navigator.clipboard
+      .read()
+      .then((clipboardItems) => {
+        clipboardItems.forEach((item) => {
+          item.getType("text/plain").then((res) => {
+            res
+              .text()
+              .then((text) => {
+                resReadDom.innerHTML = `<p>读取成功！使用 clipboardItem.getType("text/plain") 获取的内容为：</p><p>${text}</p>`;
+              })
+              .catch((err) => {
+                resReadDom.innerHTML = `<p>读取失败！使用的 clipboardItem.getType("text/plain") api不支持, 错误内容为：</p><p>${err.toString()}</p>`;
+              });
+          });
+        });
+      })
+      .catch((err) => {
+        resReadDom.innerHTML = `<p>---读取成功,navigator.clipboard.read() api不支持, 错误内容为：</p><p>${err.toString()}</p>`;
+      });
+  }
+}
+
+/** 清空clipboard.read()的内容 */
+function clearByRead() {
+  const resReadDom = document.querySelector(".result-text.read-res");
+  if (resReadDom) {
+    resReadDom.innerHTML = "";
+  }
+}
+
+/** 通过 clipboard.readText() 读取剪切板内容 */
+function handleReadTextClipboard() {
+  const resReadTextDom = document.querySelector(".result-text.read-text-res");
+  if (resReadTextDom) {
+    navigator.clipboard
+      .readText()
+      .then((text) => {
+        resReadTextDom.innerHTML = `<p>读取成功！文本内容为：</p><p>${text}</p>`;
+      })
+      .catch((err) => {
+        resReadTextDom.innerHTML = `<p>读取失败！使用的 navigator.clipboard.readText api不支持, 错误内容为：</p><p>${err.toString()}</p>`;
+      });
+  }
+}
+
+/** 清空clipboard.readText()的内容 */
+function clearByReadText() {
+  const resReadTextDom = document.querySelector(".result-text.read-text-res");
+  if (resReadTextDom) {
+    resReadTextDom.innerHTML = "";
+  }
+}
+
 document.addEventListener("copy", function (event) {
-  // event.preventDefault();
-  // event.stopPropagation();
+  event.preventDefault();
+  event.stopPropagation();
   // const clipboardData = event.clipboardData;
   // clipboardData.clearData();
   // clipboardData.setData("text/plain", "testObj");
   // clipboardData.setData("mind/node", stringifyData);
   // clipboardData.setData("text/html", stringifyData);
-
   // console.log("copy clipboardData.types :>> ", clipboardData.types);
-  handleCopy();
+  handleWriteClipboard();
 });
 
-// document.addEventListener("paste", function (event) {
-//   const clipboardData = event.clipboardData;
-//   const mindNode = clipboardData.getData("mind/node");
-//   const textPlain = clipboardData.getData("text/plain");
-//   // const textHtml = clipboardData.getData("text/html");
-//   const textHtml = "{}";
-//   console.log("----------下面是粘贴的内容----------");
-//   console.log("paste textPlain :>> ", textPlain);
-//   console.log("paste mindNode :>> ", mindNode);
-//   console.log("textHtml :>> ", textHtml);
+const writeBtnDom = document.querySelector(".btn.write-btn");
+writeBtnDom?.addEventListener("click", handleWriteClipboard);
 
-//   const res = textHtml.match(
-//     /<!--StartFragment-->(.*?)<!--EndFragment-->/s
-//   );
-//   console.log("res :>> ", res);
+const readBtnDom = document.querySelector(".btn.read-btn");
+readBtnDom?.addEventListener("click", handleReadClipboard);
 
-//   console.log("paste clipboardData.items :>> ", clipboardData.items);
-//   console.log("paste clipboardData.types :>> ", clipboardData.types);
-// });
+const clearBtnDom = document.querySelector(".btn.read-clear-btn");
+clearBtnDom?.addEventListener("click", clearByRead);
 
-const copyBtnDom = document.querySelector(".copy-btn");
-copyBtnDom?.addEventListener("click", handleCopy);
+const readTextBtnDom = document.querySelector(".btn.read-text-btn");
+readTextBtnDom?.addEventListener("click", handleReadTextClipboard);
 
-const clearBtnDom = document.querySelector(".clear-btn");
-clearBtnDom?.addEventListener("click", clearTextToDiv);
+const clearTextBtnDom = document.querySelector(".btn.read-text-clear-btn");
+clearTextBtnDom?.addEventListener("click", clearByReadText);

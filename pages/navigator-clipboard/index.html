@@ -8,20 +8,63 @@
   </head>
 
   <body>
-    <div class="box">
-      <label for="textIpt">输入内容 :</label>
-      <textarea id="textIpt">
-{ name: 'zhansan', school: { level: 1 } }</textarea
-      >
-      <input class="copy-btn" value="点击复制或者直接Ctrl+C" type="button" />
+    <div class="tab-wrapper">
+      <div class="item-wrapper">
+        <label for="text-ipt">输入内容 :</label>
+        <textarea id="text-ipt">
+  { name: 'zhansan', school: { level: 1 } }</textarea
+        >
+        <input
+          class="btn write-btn"
+          value="点击或Ctrl+C写入剪切板"
+          type="button"
+        />
+      </div>
+      <div class="line-vertical"></div>
+      <div class="item-wrapper">
+        <label>操作结果 :</label>
+        <div class="result-text write-res"></div>
+      </div>
     </div>
 
-    <p class="line"></p>
+    <!-- 横线 -->
+    <p class="line-horizontal"></p>
 
-    <div class="box">
-      <label>操作结果 :</label>
-      <div class="text-content"></div>
-      <input class="clear-btn" value="清空" type="button" />
+    <!-- clipboard.read() -->
+    <div class="tab-wrapper">
+      <div class="item-wrapper">
+        <input
+          class="btn read-btn"
+          value="点击使用 navigator.clipboard.read() 方法读取剪切板"
+          type="button"
+        />
+      </div>
+      <div class="line-vertical"></div>
+      <div class="item-wrapper">
+        <label>操作结果 :</label>
+        <div class="result-text read-res"></div>
+        <input class="btn read-clear-btn" value="清空" type="button" />
+      </div>
+    </div>
+
+    <!-- 横线 -->
+    <p class="line-horizontal"></p>
+
+    <!-- clipboard.readText() -->
+    <div class="tab-wrapper">
+      <div class="item-wrapper">
+        <input
+          class="btn read-text-btn"
+          value="点击使用 navigator.clipboard.readText() 方法读取剪切板"
+          type="button"
+        />
+      </div>
+      <div class="line-vertical"></div>
+      <div class="item-wrapper">
+        <label>操作结果 :</label>
+        <div class="result-text read-text-res"></div>
+        <input class="btn read-text-clear-btn" value="清空" type="button" />
+      </div>
     </div>
 
     <script type="module" src="./index.ts"></script>

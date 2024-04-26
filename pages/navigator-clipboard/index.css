@@ -1,15 +1,20 @@
-.box {
+.tab-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.tab-wrapper .item-wrapper {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.box #textIpt {
+.tab-wrapper .item-wrapper #text-ipt {
   min-width: 300px;
   min-height: 200px;
 }
 
-.box .text-content {
+.tab-wrapper .item-wrapper .result-text {
   all: unset;
   border: 1px solid #ccc;
   min-width: 300px;
@@ -22,7 +27,15 @@
   display: inline-block;
 }
 
-.line {
+.tab-wrapper .line-vertical {
+  width: 1px;
+  min-height: 300px;
+  display: block;
+  background-color: #ccc;
+  margin: 0 24px;
+}
+
+.line-horizontal {
   display: block;
   height: 1px;
   background-color: #ccc;
