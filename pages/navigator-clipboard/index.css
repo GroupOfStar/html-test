@@ -27,6 +27,14 @@
   display: inline-block;
 }
 
+.tab-wrapper .item-wrapper .result-text .success {
+  color: #52c41a;
+}
+
+.tab-wrapper .item-wrapper .result-text .error {
+  color: #ff4d4f;
+}
+
 .tab-wrapper .line-vertical {
   width: 1px;
   min-height: 300px;

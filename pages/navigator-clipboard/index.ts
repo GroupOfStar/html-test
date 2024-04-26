@@ -12,10 +12,10 @@ function handleWriteClipboard() {
 
     navigator.clipboard.write(data).then(
       () => {
-        resWriteDom.innerHTML = `<p>写入成功！内容为：</p><p>${iptDom.value}</p>`;
+        resWriteDom.innerHTML = `<div class="success"><p>写入成功！内容为：</p><p>${iptDom.value}</p></div>`;
       },
       (err) => {
-        resWriteDom.innerHTML = `<p>---写失败,navigator.clipboard.write() api不支持, 错误内容为：</p><p>${err.toString()}</p>`;
+        resWriteDom.innerHTML = `<div class="error"><p>写入失败，navigator.clipboard.write() api不支持, 错误内容为：</p><p>${err.toString()}</p></div>`;
       }
     );
   }
@@ -33,16 +33,16 @@ function handleReadClipboard() {
             res
               .text()
               .then((text) => {
-                resReadDom.innerHTML = `<p>读取成功！使用 clipboardItem.getType("text/plain") 获取的内容为：</p><p>${text}</p>`;
+                resReadDom.innerHTML = `<div class="success"><p>读取成功！使用 clipboardItem.getType("text/plain") 获取的内容为：</p><p>${text}</p></div>`;
               })
               .catch((err) => {
-                resReadDom.innerHTML = `<p>读取失败！使用的 clipboardItem.getType("text/plain") api不支持, 错误内容为：</p><p>${err.toString()}</p>`;
+                resReadDom.innerHTML = `<div class="error"><p>使用的 clipboardItem.getType("text/plain") api读取失败！错误内容为：</p><p>${err.toString()}</p></div>`;
               });
           });
         });
       })
       .catch((err) => {
-        resReadDom.innerHTML = `<p>---读取成功,navigator.clipboard.read() api不支持, 错误内容为：</p><p>${err.toString()}</p>`;
+        resReadDom.innerHTML = `<div class="error"><p>使用 navigator.clipboard.read() api读取失败！ 错误内容为：</p><p>${err.toString()}</p></div>`;
       });
   }
 }
@@ -62,10 +62,10 @@ function handleReadTextClipboard() {
     navigator.clipboard
       .readText()
       .then((text) => {
-        resReadTextDom.innerHTML = `<p>读取成功！文本内容为：</p><p>${text}</p>`;
+        resReadTextDom.innerHTML = `<div class="success"><p>读取成功！文本内容为：</p><p>${text}</p></div>`;
       })
       .catch((err) => {
-        resReadTextDom.innerHTML = `<p>读取失败！使用的 navigator.clipboard.readText api不支持, 错误内容为：</p><p>${err.toString()}</p>`;
+        resReadTextDom.innerHTML = `<div class="error"><p>使用的 navigator.clipboard.readText() api读取失败！错误内容为：</p><p>${err.toString()}</p></div>`;
       });
   }
 }
