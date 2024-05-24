@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图片放大缩小</title>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    #app {
+      height: 100vh;
+      background-color: #f9f8ed;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <svg
+        data-v-5aeb795a=""
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        width="1278"
+        height="785"
+        style="display: block"
+      >
+        <g
+          data-v-f3df46a8=""
+          id="mind#502834d4-372a-4ca7-8037-5d98cb3a78a3"
+          transform="matrix(1,0,0,1,220,121)"
+          style="display: block"
+        >
+          <!-- 82 + 20*2 + 9*2  = 140 + 2*2 + 2*2 = 148-->
+          <rect
+            data-v-f3df46a8=""
+            class="node-border active"
+            width="158"
+            height="87"
+            x="-9"
+            y="-13"
+            rx="4"
+            ry="4"
+            fill-opacity="0"
+            stroke-width="1"
+            stroke="#7716d9"
+          ></rect>
+          <!-- 82 + 20*2 + 9*2  = 140-->
+          <rect
+            data-v-f3df46a8=""
+            class="signal-node"
+            width="140"
+            height="61"
+            x="0"
+            y="0"
+            rx="0"
+            ry="0"
+            fill="#FFBC9E"
+            stroke-dasharray="none"
+            stroke-width="10"
+            stroke="#000000"
+            cursor="pointer"
+          ></rect>
+          <foreignObject
+            data-v-f3df46a8=""
+            class="node-foreignObject"
+            width="82"
+            height="27"
+            x="29"
+            y="17"
+            cursor="pointer"
+            style="background-color: aquamarine"
+          >
+          </foreignObject>
+        </g>
+      </svg>
+      <input id="btn" type="button" value="点击" />
+    </div>
+    <script type="module" src="./index.ts"></script>
+  </body>
+</html>

@@ -17,6 +17,10 @@ export default defineConfig({
           "pages/navigator-clipboard/index.html"
         ),
         "img-stretch": resolve(__dirname, "pages/img-stretch/index.html"),
+        "svg-rect-position": resolve(
+          __dirname,
+          "pages/svg-rect-position/index.html"
+        ),
       },
     },
     outDir: "./dist",
